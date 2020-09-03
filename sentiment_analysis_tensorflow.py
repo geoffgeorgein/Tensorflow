@@ -59,12 +59,9 @@ model.compile(loss='binary_crossentropy',
 model.summary()
 
 
-
-
-
 simple_log=LambdaCallback(on_epoch_end=lambda e,l:print(e,end='.'))
 
-E=20
+E=20 #no. of epochs
 
 h=model.fit(x_train,y_train,
            validation_split= 0.2,
