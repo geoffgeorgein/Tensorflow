@@ -4,7 +4,10 @@
 
 
 from tensorflow.python.keras.datasets import imdb
-
+from tensorflow.python.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D
+from tensorflow.python.keras.preprocessing.sequence import pad_sequences
+from tensorflow.python.keras.callbacks import LambdaCallback
 
 (x_train,y_train),(x_test,y_test)=imdb.load_data(num_words=10000)
 
@@ -32,9 +35,6 @@ print(len(x_train[0])) #different reviews have different length
 print(len(x_train[6]))
 
 
-from tensorflow.python.keras.preprocessing.sequence import pad_sequences
-
-
 #padding with the since it doesn't carry any information
 x_train=pad_sequences(x_train,value=word_index['the'],padding='post',maxlen=256)
 x_test=pad_sequences(x_test,value=word_index['the'],padding='post',maxlen=256)
@@ -45,12 +45,6 @@ print(len(x_test[6]))
 
 
 decode(x_train[0])
-
-
-
-from tensorflow.python.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D
-
 
 
 model=Sequential([Embedding(10000,16),  #Since it has 16 features
@@ -65,7 +59,7 @@ model.summary()
 
 
 
-from tensorflow.python.keras.callbacks import LambdaCallback
+
 
 simple_log=LambdaCallback(on_epoch_end=lambda e,l:print(e,end='.'))
 
