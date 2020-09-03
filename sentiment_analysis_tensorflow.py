@@ -8,6 +8,7 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.callbacks import LambdaCallback
+import numpy as np
 
 (x_train,y_train),(x_test,y_test)=imdb.load_data(num_words=10000)
 
@@ -88,7 +89,6 @@ loss,acc=model.evaluate(x_test,y_test)
 print('Test accuracy',acc*100)
 
 
-import numpy as np
 p=model.predict(np.expand_dims(x_test[5],axis=5))
 print(class_names[np.argmax(p[5])])
 
